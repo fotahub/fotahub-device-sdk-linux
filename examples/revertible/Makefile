@@ -46,22 +46,32 @@ ARM_LINUX_TOOLS_HOME ?= /opt/cross-pi-gcc
 endif
 
 define ConfigureCrossCompilationToolchain
-ifeq ($(TARGET),$(1))
+ifeq ($$(TARGET),$(1))
 ifdef $(2)
-ifeq ($$(wildcard $(3)),)
+ifeq ($$(wildcard $$($(2))),)
 $$(error Toolchain for $(1) not found - make sure that any such is installed and an environment variable named '$(2)' exists and refers to it)
 endif
-export CC = $(3)/bin/$(4)gcc
-export LD = $(3)/bin/$(4)gcc
+export CC = $$($(2))/bin/$(3)
+export LD = $$(if $$(filter-out $(3),$(4)),$$($(2))/bin/$(4),$$(CC))
+TARGET_TOOLCHAIN_AVAILABLE = true
+else
+ifneq ($(3),)
+export CC = $(3)
+else
+ifeq ($$(CC),cc)
+$$(error Compiler for $(1) not found - make sure that any such is installed and an environment variable named 'CC' exists and refers to it)
+endif
+endif
+export LD = $$(if $$(filter-out $(3),$(4)),$(4),$$(CC))
 TARGET_TOOLCHAIN_AVAILABLE = true
 endif
 endif
 endef
-$(eval $(call ConfigureCrossCompilationToolchain,RasPiOS,ARM_LINUX_TOOLS_HOME,$(ARM_LINUX_TOOLS_HOME),arm-linux-gnueabihf-))
+$(eval $(call ConfigureCrossCompilationToolchain,RasPiOS,ARM_LINUX_TOOLS_HOME,arm-linux-gnueabihf-gcc,))
 
 ifeq ($(HOST),$(TARGET))
 export CC = gcc
-export LD = gcc
+export LD = $(CC)
 TARGET_TOOLCHAIN_AVAILABLE = true
 endif
 
@@ -88,7 +98,7 @@ export FOTAHUB_LIBDIR ?= $(PREFIX)/lib
 # Begin DemoProduct Executable
 #  
 
-SUPPORTED_TARGETS_DemoProduct = Linux RasPiOS
+SUPPORTED_TARGETS_DemoProduct = Linux Yocto RasPiOS
 
 # => 'true' if SUPPORTED_TARGETS contains 'any', undefined otherwise
 FULLY_PORTABLE_DemoProduct = $(if $(filter any,$(SUPPORTED_TARGETS_DemoProduct)),true,)
@@ -102,7 +112,7 @@ MATCHES_TARGET_DemoProduct = $(if $(or $(FULLY_PORTABLE_DemoProduct),$(filter $(
 BUILDABLE_DemoProduct = $(if $(and $(MATCHES_TARGET_DemoProduct),$(TARGET_TOOLCHAIN_AVAILABLE)),true,)
 
 EXPFX_DemoProduct = ./
-EXAFKT_DemoProduct = $(shell sed -n -e 's@^\#define DEMO_PRODUCT_NAME "\(.\+\)"@\1@p' DemoProductInfo.h | sed -e 's@\s@@g')
+EXAFKT_DemoProduct = $(shell sed -n -e 's@^\#define DEMO_PRODUCT_NAME "\(.\+\)"@\1@p' DemoProductInfo.h | sed -e 's@\s@@g') $(if $(UPDATE),Update,)
 EXEXT_DemoProduct = 
 
 ALL_CFLAGS_DemoProduct = $(CFLAGS) -D_DEFAULT_SOURCE
