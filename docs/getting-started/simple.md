@@ -4,9 +4,9 @@ The *Simple* example demonstrates the most straight forward manner to make firmw
 
 ## Operating principle
 
-The goal of this example is to create an executable program that represents an IoT device firmware and demonstrates a full firmware update cycle using FotaHub on a Linux-based device of your choice.
+In this example, your Linux desktop or Raspberry Pi (or a similar single board computer) will be used as an imaginary IoT device. A FotaHub product will be set up to provide firmware updates for the same. The IoT device firmware is actually going to be an executable program. It demonstrates a full firmware update cycle using FotaHub directly on your Linux machine.
 
-The firmware program is going to be named after the corresponding FotaHub product (e.g., `DemoProduct.exe`) that you will create along the way (or maybe have created already). Right after being launched, it creates and opens a file named `DemoProductUpdate.info` that is located in the same folder as the firmware program. It waits until a firmware update info string is entered and saved in this file. The latter is expected to consist of the new firmware version the device should be updated to followed by a ':' and the checksum or signature of the new firmware version:
+The firmware program is going to be named after the corresponding FotaHub product (e.g., `DemoProduct.exe`). Right after being launched, it creates and opens a file named `DemoProductUpdate.info` that is located in the same folder as the firmware program. It waits until a firmware update info string is entered and saved in this file. The latter is expected to consist of the new firmware version the device should be updated to followed by a ':' and the checksum or signature of the new firmware version:
 
 `<new-version>:<verificationData>` 
 
@@ -30,13 +30,19 @@ A description of the tools that must be available on your laptop or computer can
 
 Create a FotaHub product that represents your Linux-based IoT device in FotaHub as explained [here](../fotahub/create-product.md). It will be used to upload and provide firmware updates for the same. 
 
+### Get the FotaHub Device SDK for Linux and Raspberry Pi
+
+If not yet done so, either clone or download and uncompress the [FotaHub Device SDK for Linux and Raspberry Pi](https://github.com/fotahub/fotahub-device-sdk-linux) to a location of your choice on your machine. 
+
+> &#x26A0; Make sure that the path to the location of the FotaHub Device SDK for Linux and Raspberry Pi on your machine does not contain any spaces.
+
 ### Create initial firmware version
 
 1. Start the Visual Studio Code and open (`File > Folder...`) the `Simple` example included in the FotaHub Device SDK for Linux and Raspberry Pi (`<device-sdk-root>\examples\simple`).
 
 > &#x1F6C8; If you intend to run this example on your Raspberry Pi (or a similar single board computer) but don't want to undergo the hassle of connecting keyboard, mouse, monitor, etc. to it, you can perform  the steps described in the following remotely from your desktop computer using SSH. You can achieve that very conveniently by [enabling SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) on your Raspberry Pi and installing the [*Remote - SSH* extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) in Visual Studio Code. Find out more about how to set up and use this feature [here](https://code.visualstudio.com/docs/remote/ssh). 
 
-2. Open the `DemoProductInfo.h` file, and initialize the `DEMO_PRODUCT_ID` and `DEMO_PRODUCT_NAME` constants with the id and the name of the previously created FotaHub product. Leave the `DEMO_PRODUCT_FIRMWARE_VERSION` as is for now. In case you have selected anything else than `SHA256` as the binary checksum algorithm for your FotaHub product or opted for using a signature instead, you also must adjust the `DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM` constant accordingly:
+2. Open the `DemoProductInfo.h` file, and initialize the `DEMO_PRODUCT_ID` and `DEMO_PRODUCT_NAME` constants with the id and the name of the previously created FotaHub product (see `Products > {{Your FotaHub product}} > Settings > General` at [Fotahub](https://fotahub.com)). Leave the `DEMO_PRODUCT_FIRMWARE_VERSION` as is for now. In case you have selected anything else than `SHA256` as the binary checksum algorithm for your FotaHub product or opted for using a signature instead, you also must adjust the `DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM` constant accordingly:
 
 ```c
 #define DEMO_PRODUCT_ID "eb8ab3b1-0938-40ec-afba-9379363948cf"
@@ -47,8 +53,6 @@ Create a FotaHub product that represents your Linux-based IoT device in FotaHub 
 
 #define DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM FOTA_UPDATE_VERIFICATION_ALGORITHM_SHA256
 ```
-   
-> &#x1F6C8; You can look up the id of your [FotaHub](https://fotahub.com) product in the `Settings > General` section of the same.
 
 3. Open the integrated terminal (`Terminal > New Terminal...`) and build the example by typing the following command:
    
@@ -91,11 +95,9 @@ chmod u+x start.sh
    
 ![](simple-1.png "Launch of initial firmware version") 
 
-3. Enter the new firmware version followed by a ':' and the checksum or signature of the same in the `DemoProductUpdate.info` file and save it.
+3. Enter the new firmware version followed by a ':' and the checksum or signature of the same (see `Products > {{Your FotaHub product}} > Details > {{New firmware version}}` at [Fotahub](https://fotahub.com)) in the `DemoProductUpdate.info` file and save it.
 
 ![](simple-2.png "Trigger of FOTA update") 
-
-> &#x1F6C8; You can find the checksum or signature of the new firmware version by selecting it in the `Details` section of your [FotaHub](https://fotahub.com) product and locating it in the properties of the same.
 
 4. This will trigger the firmware over-the-air update procedure. Upon successful completion, the initial firmware program exits and the new firmware version downloaded from FotaHub is started automatically. To verify that, check the firmware version in the banner being printed into the terminal output:
 
