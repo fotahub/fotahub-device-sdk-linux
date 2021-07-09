@@ -54,7 +54,7 @@ If not yet done so, either clone or download and uncompress the [FotaHub Device 
 #define DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM FOTA_UPDATE_VERIFICATION_ALGORITHM_SHA256
 ```
 
-3. Open the integrated terminal (`Terminal > New Terminal...`) and build the example by typing the following command:
+3. Open the integrated terminal (`Terminal > New Terminal`) and build the example by typing the following command:
    
 ```bat
 make
