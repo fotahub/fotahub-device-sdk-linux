@@ -16,20 +16,72 @@ This document contains notices about third-party software (or certain identified
 <tr>
 <td>Affected file(s):</td>
 <td>
-<code>lib/linux/libmbedtls.a</code><br/>
-<code>lib/linux/libmbedcrypto.a</code><br/>
-<code>lib/linux/libmbedx509.a</code><br/>
-<code>lib/raspios/libmbedtls.a</code><br/>
-<code>lib/raspios/libmbedcrypto.a</code><br/>
-<code>lib/raspios/libmbedx509.a</code>
+<code>third-party/mbedtls/lib/linux/libmbedtls.a</code><br/>
+<code>third-party/mbedtls/lib/linux/libmbedcrypto.a</code><br/>
+<code>third-party/mbedtls/lib/linux/libmbedx509.a</code><br/>
+<code>third-party/mbedtls/lib/raspios/libmbedtls.a</code><br/>
+<code>third-party/mbedtls/lib/raspios/libmbedcrypto.a</code><br/>
+<code>third-party/mbedtls/lib/raspios/libmbedx509.a</code>
 </td>
 </tr>
 <tr>
 <td>Changed file(s):</td>
 <td>
-<code>lib/linux/libmbedtls.a</code><br/>
-<code>lib/raspios/libmbedtls.a</code>
+<code>third-party/mbedtls/lib/linux/libmbedtls.a</code><br/>
+<code>third-party/mbedtls/lib/raspios/libmbedtls.a</code>
 </td>
 </tr>
 </tbody>
 </table>
+
+## MQTTPacket component from Eclipse Paho MQTT C/C++ client for Embedded platforms
+<table>
+<tbody>
+<tr>
+<td>URL:</td>
+<td><a href="https://github.com/eclipse/paho.mqtt.embedded-c/tree/master/MQTTPacket/src">https://github.com/eclipse/paho.mqtt.embedded-c</a></td>
+</tr>
+<tr>
+<td>Licence(s):</td>
+<td><a href="https://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><br/>
+<a href="https://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License - v 1.0</a></td>
+</tr>
+<tr>
+<td>Affected file(s):</td>
+<td>
+<code>third-party/paho.mqtt.embedded-c/*.c</code><br/>
+<code>third-party/paho.mqtt.embedded-c/include/*.h</code>
+</td>
+</tr>
+<tr>
+<td>Changed file(s):</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+
+## JSON component from Contiki operating system
+<table>
+<tbody>
+<tr>
+<td>URL:</td>
+<td><a href="https://github.com/contiki-os/contiki/tree/master/apps/json">https://github.com/contiki-os/contiki</a></td>
+</tr>
+<tr>
+<td>Licence(s):</td>
+<td><a href="https://github.com/contiki-os/contiki/blob/master/LICENSE">Contiki 3-clause BSD license<a></td>
+</tr>
+<tr>
+<td>Affected file(s):</td>
+<td>
+<code>third-party/se.sics.contiki.json/*.c</code><br/>
+<code>third-party/se.sics.contiki.json/include/*.h</code>
+</td>
+</tr>
+<tr>
+<td>Changed file(s):</td>
+<td>all</td>
+</tr>
+</tbody>
+</table>
+

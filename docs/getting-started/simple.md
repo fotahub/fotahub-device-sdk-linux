@@ -4,9 +4,9 @@ The *Simple* example demonstrates the most straight forward manner to make firmw
 
 ## Operating principle
 
-In this example, your Linux desktop or Raspberry Pi (or a similar single board computer) will be used as an imaginary IoT device. A FotaHub product will be set up to provide firmware updates for the same. The IoT device firmware is actually going to be an executable program. It demonstrates a full firmware update cycle using FotaHub directly on your Linux machine.
+In this example, your Linux desktop computer or Raspberry Pi (or a similar single board computer) will be used as an imaginary IoT device. A FotaHub product will be set up to provide firmware updates for the same. The IoT device firmware is actually going to be an executable program. It demonstrates a full firmware update cycle using FotaHub directly on your Linux machine.
 
-The firmware program is going to be named after the corresponding FotaHub product (e.g., `DemoProduct.exe`). Right after being launched, it creates and opens a file named `DemoProductUpdate.info` that is located in the same folder as the firmware program. It waits until a firmware update info string is entered and saved in this file. The latter is expected to consist of the new firmware version the device should be updated to followed by a ':' and the checksum or signature of the new firmware version:
+The firmware program is going to be named after the corresponding FotaHub product (e.g., `DemoProduct`). Right after being launched, it creates and opens a file named `DemoProductUpdate.info` that is located in the same folder as the firmware program. It waits until a firmware update info string is entered and saved in this file. The latter is expected to consist of the new firmware version the device should be updated to followed by a ':' and the checksum or signature of the new firmware version:
 
 `<new-version>:<verificationData>` 
 
@@ -14,7 +14,7 @@ e.g., `1.1:a15d5599d8745ff4f51690eb3996afcf75d0b1729d1b8cda2491b03940417521`
 
 Once a valid update info string has been found in the `DemoProductUpdate.info` file and the contained new firmware version is different from the version of the already running firmware program, the firmware update procedure is triggered. It involves your Linux device to connect to FotaHub and download the binary (i.e., the executable program) of the new firmware version. Thereby, it uses a dedicated URL including the id of the product representing the device in FotaHub, and the name and the version of the firmware binary to be retrieved.
 
-The downloaded firmware binary is stored in a new firmware program file that has the same name as the original one followed by an imaginary partition index '1' (e.g., `DemoProduct1.exe`). At the same time, the downloaded firmware binary's checksum or signature gets recalculated and compared to the checksum or signature included in the previously communicated update info string. If both match the firmware update gets activated by loading and executing the new firmware program file as a new child process. This causes the original firmware program to be replaced with a running instance of the new firmware version downloaded from FotaHub.  
+The downloaded firmware binary is stored in a new firmware program file that has the same name as the original one followed by an imaginary partition index '1' (e.g., `DemoProduct1`). At the same time, the downloaded firmware binary's checksum or signature gets recalculated and compared to the checksum or signature included in the previously communicated update info string. If both match the firmware update gets activated by loading and executing the new firmware program file as a new child process. This causes the original firmware program to be replaced with a running instance of the new firmware version downloaded from FotaHub.  
 
 ## Supported targets
 
@@ -38,7 +38,7 @@ If not yet done so, either clone or download and uncompress the [FotaHub Device 
 
 ### Create initial firmware version
 
-1. Start the Visual Studio Code and open (`File > Folder...`) the `Simple` example included in the FotaHub Device SDK for Linux and Raspberry Pi (`<device-sdk-root>\examples\simple`).
+1. Start the Visual Studio Code and open (`File > Folder...`) the `Simple` example included in the FotaHub Device SDK for Linux and Raspberry Pi (`<device-sdk-root>/examples/simple`).
 
 > &#x1F6C8; If you intend to run this example on your Raspberry Pi (or a similar single board computer) but don't want to undergo the hassle of connecting keyboard, mouse, monitor, etc. to it, you can perform  the steps described in the following remotely from your desktop computer using SSH. You can achieve that very conveniently by [enabling SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) on your Raspberry Pi and installing the [*Remote - SSH* extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) in Visual Studio Code. Find out more about how to set up and use this feature [here](https://code.visualstudio.com/docs/remote/ssh). 
 
@@ -56,7 +56,7 @@ If not yet done so, either clone or download and uncompress the [FotaHub Device 
 
 3. Open the integrated terminal (`Terminal > New Terminal`) and build the example by typing the following command:
    
-```bat
+```sh
 make
 ```
 
@@ -72,7 +72,7 @@ make
 
 2. Rebuild the example by typing the following command in the integrated terminal:
 
-```bat
+```sh
 make UPDATE=y
 ```
 
@@ -84,11 +84,11 @@ make UPDATE=y
 
 ### Make your first firmare over-the-air update 
 
-1. Go back to Visual Studio Code and launch the initial firmware version by typing the following commands in the integrated terminal (use `raspios` as OS when you are working on a Raspberry Pi or `linux` otherwise, and choose the firmware program name according to your FotaHub product name, e.g., `DemoProduct`):
+1. Go back to Visual Studio Code and launch the initial firmware version by typing the following commands in the integrated terminal. Use `raspios` as OS when you are working on a Raspberry Pi or `linux` otherwise, and choose the firmware program name according to your FotaHub product name, e.g., `DemoProduct`:
 
-```bat
+```sh
 chmod u+x start.sh
-./start.sh build/<os>/debug/bin/<product-name>.exe
+./start.sh build/<os>/debug/bin/<product-name>
 ```
 
 2. The firmware program prints a banner including the product name and the initial firmware version into the terminal output. It also creates and opens the `DemoProductUpdate.info` file directly in Visual Studio Code (if the latter is not installed on your machine, you will need to open the `DemoProductUpdate.info` file manually in an editor of you choice):

@@ -120,7 +120,7 @@ ALL_CFLAGS_DemoProduct = $(CFLAGS) -D_DEFAULT_SOURCE
 LIBS_DemoProduct = fotahub
 LIBDIRS_DemoProduct = $(FOTAHUB_LIBDIR)
 EXT_LIBS_DemoProduct = mbedtls mbedcrypto mbedx509 rt pthread
-EXT_LIBDIRS_DemoProduct = $(PREFIX)/lib/$(shell echo $(TARGET) | tr A-Z a-z)
+EXT_LIBDIRS_DemoProduct = $(PREFIX)/third-party/mbedtls/lib/$(shell echo $(TARGET) | tr A-Z a-z) $(PREFIX)/lib/$(shell echo $(TARGET) | tr A-Z a-z)
 ALL_LIBS_DemoProduct = $(wildcard $(FOTAHUB_LIBDIR)/libfotahub.a) $(foreach ldir,$(LIBDIRS),$(wildcard $(ldir)/libfotahub.a))
 ALL_LIB_FLAGS_DemoProduct = $(addprefix -l,$(LIBS_DemoProduct)) $(addprefix -l,$(EXT_LIBS_DemoProduct))
 ALL_LIBDIR_FLAGS_DemoProduct = $(addprefix -L,$(LIBDIRS_DemoProduct)) $(addprefix -L,$(LIBDIRS)) $(addprefix -L,$(EXT_LIBDIRS_DemoProduct))
@@ -130,7 +130,7 @@ EXT_INCDIRS_DemoProduct =
 ALL_INCDIR_FLAGS_DemoProduct = $(addprefix -I,$(LIB_INCDIRS_DemoProduct)) $(addprefix -I,$(INCDIRS)) $(addprefix -I,$(EXT_INCDIRS_DemoProduct))
 ALL_INCS_DemoProduct = Main.h DemoFOTAUpdateWorkflow.h BinHexConverter.h SinglePartitionDemoFirmwareUpdateInfoFileReader.h Configuration.h DemoFOTAUpdateSelfTest.h DemoFOTAUpdateWorkflowFilePersistence.h DemoFOTAUpdateWorkflowPersistence.h DemoProductInfo.h $(foreach lidir,$(LIB_INCDIRS_DemoProduct),$(wildcard $(lidir)/*.h)) $(foreach idir,$(INCDIRS),$(wildcard $(idir)/*.h)) $(foreach eidir,$(EXT_INCDIRS_DemoProduct),$(wildcard $(eidir)/*.h))
 
-ALL_SRCS_DemoProduct = Main.c DemoFOTAUpdateWorkflow.c BinHexConverter.c SinglePartitionDemoFirmwareUpdateInfoFileReader.c Configuration.c DemoFOTAUpdateSelfTest.c DemoFOTAUpdateWorkflowFilePersistence.c
+ALL_SRCS_DemoProduct = BinHexConverter.c Configuration.c DemoFOTAUpdateSelfTest.c DemoFOTAUpdateWorkflow.c DemoFOTAUpdateWorkflowFilePersistence.c Main.c SinglePartitionDemoFirmwareUpdateInfoFileReader.c
 
 ALL_OBJS_DemoProduct = $(patsubst %.c,$(OBJODIR)/%.o,$(notdir $(ALL_SRCS_DemoProduct)))
 

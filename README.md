@@ -9,15 +9,18 @@ The FotaHub® Device SDK for Linux® and Raspberry Pi can be used on:
 * Linux desktop computers (for testing and evaluation purpuses)
 
 > &#x1F6C8; You can test/evaluate the FotaHub® Device SDK for Linux® and Raspberry Pi even on a Windows&reg; or Mac&reg; OS X machine by using [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl) or [Docker Desktop](https://www.docker.com/products/docker-desktop).
+
 # Installation
 To use the FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi, the following tools must be available on your laptop or computer:
 * A GCC compiler/linker toolchain
-* A text editor or IDE of your choice, e.g., [Visual Studio Code](https://code.visualstudio.com) 
+* The [Python 3 interpreter](https://wiki.python.org/moin/BeginnersGuide/Download)
+* A text editor or IDE of your choice, e.g., [Visual Studio Code](https://code.visualstudio.com)
 
 # Getting started
 The best way to get started with the FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi is to try out and study the included examples:
 * [Simple](docs/getting-started/simple.md) - "Hello World" of firmware over-the-air updating with FotaHub&reg;
 * [Revertible](docs/getting-started/revertible.md) - Downloads and launches a new firmware version provided at FotaHub&reg;, reverts to the previous version if something goes wrong
+* [Thing Shadow](docs/getting-started/thingshadow.md) - A real-world scenario where FotaHub&reg; is used in combination with the AWS IoT Thing Shadow service to trigger firmware updates over-the-air updates through the cloud
 
 # API Reference
 View the [C API reference](include/FotaHub.h) for detailed information about the FotaHub&reg; client library (:construction: *under construction*).
