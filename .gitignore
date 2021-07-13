@@ -1,3 +1,5 @@
 /examples/**/build
+/examples/**/Certificate.c
+/examples/**/PrivateKey.c
 /examples/**/*.info
 /examples/**/*.state
