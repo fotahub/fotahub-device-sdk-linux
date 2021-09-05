@@ -6,7 +6,7 @@ The FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi enables developers t
 The FotaHub® Device SDK for Linux® and Raspberry Pi can be used on:
 * Single board computers like Raspberry Pi and others
 * Linux-based edge IoT devices
-* Linux desktop computers (for testing and evaluation purpuses)
+* Linux desktop computers (for testing and evaluation purposes)
 
 > &#x1F6C8; You can test/evaluate the FotaHub® Device SDK for Linux® and Raspberry Pi even on a Windows&reg; or Mac&reg; OS X machine by using [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl) or [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
