@@ -1,14 +1,14 @@
 # FotaHub&reg; Embedded Device SDK for Linux&reg; and Raspberry Pi
-The FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi enables developers to create firmware for Linxu&reg; or Raspberry Pi-based IoT devices that can be updated through [FotaHub](http://fotahub.com). It provides an C99-based FotaHub client library along with a set of examples illustrating how the latter can be used and integrated in real applications.
+The FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi enables developers to create firmware for Linxu&reg; or Raspberry Pi-based IoT devices that can be updated through [FotaHub](http://fotahub.com). It provides a FotaHub client C library along with a set of examples illustrating how the latter can be used and integrated in real applications.
 
 # Supported targets
 
-The FotaHub® Device SDK for Linux® and Raspberry Pi can be used on:
+The FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi can be used on:
 * Single board computers like Raspberry Pi and others
 * Linux-based edge IoT devices
 * Linux desktop computers (for testing and evaluation purposes)
 
-> &#x1F6C8; You can test/evaluate the FotaHub® Device SDK for Linux® and Raspberry Pi even on a Windows&reg; or Mac&reg; OS X machine by using [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl) or [Docker Desktop](https://www.docker.com/products/docker-desktop).
+> &#x1F6C8; You can test/evaluate the FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi even on a Windows&reg; or Mac&reg; OS X machine by using [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl) or [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 # Installation
 To use the FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi, the following tools must be available on your laptop or computer:
