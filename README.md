@@ -2,7 +2,6 @@
 The FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi enables developers to create firmware for Linxu&reg; or Raspberry Pi-based IoT devices that can be updated through [FotaHub](http://fotahub.com). It provides a FotaHub client C library along with a set of examples illustrating how the latter can be used and integrated in real applications.
 
 # Supported targets
-
 The FotaHub&reg; Device SDK for Linux&reg; and Raspberry Pi can be used on:
 * Single board computers like Raspberry Pi and others
 * Linux-based edge IoT devices
