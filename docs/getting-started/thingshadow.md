@@ -147,7 +147,7 @@ make UPDATE=y
 1. Go back to Visual Studio Code and launch the initial firmware version by typing the following commands in the integrated terminal. Use `raspios` as OS when you are working on a Raspberry Pi or `linux` otherwise, and choose the firmware program name according to your FotaHub product name, e.g., `DemoProduct`:
 
 ```sh
-chmod u+x start.sh
+chmod +x start.sh
 ./start.sh build/<os>/debug/bin/<product-name>
 ```
 
