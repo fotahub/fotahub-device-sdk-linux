@@ -62,7 +62,7 @@ A description of the tools that must be available on your laptop or computer and
    * Create an AWS IoT policy which authorizes your device to exchange messages with AWS IoT 
    * Create the AWS IoT thing itself along with an X.509 device certificate that is used to authenticate your device to AWS IoT
 
-<p style="margin-left: 2em">A comprehensive guide explaining how to proceed in detail can be found <a href="https://docs.aws.amazon.com/iot/latest/developerguide/create-iot-resources.html">here</a>.</p> 
+    A comprehensive guide explaining how to proceed in detail can be found [here](https://docs.aws.amazon.com/iot/latest/developerguide/create-iot-resources.html).
 
 3. Delete the initially created unnamed classic shadow of your AWS IoT thing (`Manage` > `Things` > `{{Your AWS IoT thing}}` > `Device Shadows` > `Classic Shadow` > `Delete` when using the *New console experience* which can be activated all down in the left side bar).
 
@@ -80,45 +80,45 @@ If not yet done so, either clone or download and uncompress the [FotaHub Device 
 
 1. Start Visual Studio Code and open (`File` > `Folder...`) the `Thing Shadow` example included in the FotaHub Device SDK for Linux and Raspberry Pi (`<device-sdk-root>/examples/thingshadow`).
 
-> &#x1F6C8; If you intend to run this example on your Raspberry Pi (or a similar single board computer) but don't want to undergo the hassle of connecting keyboard, mouse, monitor, etc. to it, you can perform  the steps described in the following remotely from your desktop computer using SSH. You can achieve that very conveniently by [enabling SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) on your Raspberry Pi and installing the [*Remote - SSH* extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) in Visual Studio Code. Find out more about how to set up and use this feature [here](https://code.visualstudio.com/docs/remote/ssh). 
+    > &#x1F6C8; If you intend to run this example on your Raspberry Pi (or a similar single board computer) but don't want to undergo the hassle of connecting keyboard, mouse, monitor, etc. to it, you can perform  the steps described in the following remotely from your desktop computer using SSH. You can achieve that very conveniently by [enabling SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) on your Raspberry Pi and installing the [*Remote - SSH* extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) in Visual Studio Code. Find out more about how to set up and use this feature [here](https://code.visualstudio.com/docs/remote/ssh). 
 
 2. Open the `DemoProductInfo.h` file and initialize the `DEMO_PRODUCT_ID` and `DEMO_PRODUCT_NAME` constants with the id and the name of the previously created FotaHub product (see `Products` > `{{Your FotaHub product}}` > `Settings` > `General` at [Fotahub](https://fotahub.com)). Leave the `DEMO_PRODUCT_FIRMWARE_VERSION` as is for now. In case you have selected anything else than `SHA256` as the binary checksum algorithm for your FotaHub product or opted for using a signature instead, you also must adjust the `DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM` constant accordingly:
 
-```c
-#define DEMO_PRODUCT_ID "7c31c4b0-6864-4c5e-bf3b-b2e3696c8f89"
+    ```c
+    #define DEMO_PRODUCT_ID "7c31c4b0-6864-4c5e-bf3b-b2e3696c8f89"
 
-#define DEMO_PRODUCT_NAME "Demo Product"
+    #define DEMO_PRODUCT_NAME "Demo Product"
 
-#define DEMO_PRODUCT_FIRMWARE_VERSION "1.0"
+    #define DEMO_PRODUCT_FIRMWARE_VERSION "1.0"
 
-#define DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM FOTA_UPDATE_VERIFICATION_ALGORITHM_SHA256
-```
+    #define DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM FOTA_UPDATE_VERIFICATION_ALGORITHM_SHA256
+    ```
 
 3. Open the `AWSIoTThingShadowConfiguration.c` file and initialize the `hostNameEndPoint.hostName` and `awsIoTConnParams.thingName` struct variable fields with your AWS account's [device data endpoint](https://docs.aws.amazon.com/iot/latest/developerguide/iot-connect-devices.html#iot-connect-device-endpoints) and the name of the previously created AWS IoT thing (see `Settings` > `Device data endpoint` and `Manage` > `Things` in the [AWS IoT Console](https://console.aws.amazon.com/iot/home) when using the *New console experience* which can be activated all down in the left side bar):
 
-```c
-HostNameEndpointAddress_t hostNameEndPoint = 
-{
-  ...
-  .hostName = "c1bskcyiphilz6-ats.iot.eu-central-1.amazonaws.com"
-};
+    ```c
+    HostNameEndpointAddress_t hostNameEndPoint = 
+    {
+    ...
+    .hostName = "c1bskcyiphilz6-ats.iot.eu-central-1.amazonaws.com"
+    };
 
-...
+    ...
 
-AWSIoTConnectionParameters_t awsIoTConnParams = 
-{
-  .thingName = "FotaHubExampleThing", 
-  ...
-};
-```
+    AWSIoTConnectionParameters_t awsIoTConnParams = 
+    {
+    .thingName = "FotaHubExampleThing", 
+    ...
+    };
+    ```
 
 4. Open the `Certificate.pem` and `PrivateKey.pem` files included in the thing shadow example. Replace all their content with that from the certificate and private key files which you have created and downloaded during the setup of the AWS IoT thing for your device. Those are typically named something like `3d19eba035-certificate.pem.crt` and `3d19eba035-private.pem.key`. 
    
 5. Open the integrated terminal (`Terminal` > `New Terminal`) and build the example by typing the following command:
-   
-```sh
-make
-```
+
+    ```sh
+    make
+    ```
 
 6. You can find the resulting firmware program in the `build/linux/debug/bin` or `build/raspios/debug/bin` folder (using the `Explorer` view). Its name equals the name of the FotaHub product configured in the `DemoProductInfo.h` file without spaces (e.g., `DemoProduct`).
 
@@ -126,19 +126,19 @@ make
 
 1. Go back to the `DemoProductInfo.h` file, and bump the `DEMO_PRODUCT_FIRMWARE_VERSION` constant:
 
-```c
-#define DEMO_PRODUCT_FIRMWARE_VERSION "1.1"
-```
+    ```c
+    #define DEMO_PRODUCT_FIRMWARE_VERSION "1.1"
+    ```
 
 2. Rebuild the example by typing the following command in the integrated terminal:
 
-```sh
-make UPDATE=y
-```
+    ```sh
+    make UPDATE=y
+    ```
 
 3. Locate the resulting new firmware program in the   `build/<os>/debug/bin` folder (using the `Explorer` view). Its name is the name of the FotaHub product configured in the `DemoProductInfo.h` file without spaces followed by an `Update` suffix (e.g., `DemoProductUpdate`).
    
-> &#x1F6C8; You can locate the new firmware program file also in your filesystem explorer or copy its path to the clipboard by using corresponding context menu actions in Visual Studio Code (`Reveal in File Explorer`/`Reveal in Finder` and `Copy Path`). When you are running this example on a Raspberry Pi (or a similar single board computer) and remotely accessing it from your desktop computer using the Visual Studio Code Remote SSH extension, you can also find a context menu action for downloading the new firmware program to your desktop computer (`Download...`). This can come quite handy in the subsequent steps.
+    > &#x1F6C8; You can locate the new firmware program file also in your filesystem explorer or copy its path to the clipboard by using corresponding context menu actions in Visual Studio Code (`Reveal in File Explorer`/`Reveal in Finder` and `Copy Path`). When you are running this example on a Raspberry Pi (or a similar single board computer) and remotely accessing it from your desktop computer using the Visual Studio Code Remote SSH extension, you can also find a context menu action for downloading the new firmware program to your desktop computer (`Download...`). This can come quite handy in the subsequent steps.
 
 4. Upload the new firmware program (e.g., `DemoProductUpdate`) as firmware version `1.1` to your FotaHub product as explained [here](../fotahub/upload-firmware.md).
 
@@ -146,18 +146,18 @@ make UPDATE=y
 
 1. Go back to Visual Studio Code and launch the initial firmware version by typing the following commands in the integrated terminal. Use `raspios` as OS when you are working on a Raspberry Pi or `linux` otherwise, and choose the firmware program name according to your FotaHub product name, e.g., `DemoProduct`:
 
-```sh
-chmod +x start.sh
-./start.sh build/<os>/debug/bin/<product-name>
-```
+    ```sh
+    chmod +x start.sh
+    ./start.sh build/<os>/debug/bin/<product-name>
+    ```
 
 2. The firmware program prints a banner including the product name and the initial firmware version into the terminal output and connects to its AWS IoT Thing Shadow:
    
-![](thingshadow-1.png "Launch of initial firmware version") 
+    ![](thingshadow-1.png "Launch of initial firmware version") 
 
 3. Go back to the [AWS IoT Console](https://console.aws.amazon.com/iot/home) and visit the unnamed classic shadow of your AWS IoT thing (`Manage` > `Things` > `{{Your AWS IoT thing}}` > `Device Shadows` > `Classic Shadow` when using the *New console experience* which can be activated all down in the left side bar). Click on the refresh button if no such is displayed. You should see that it yields a shadow state document with a `currentVersion` attribute that indicates the currently running firmware version on your device:
 
-![](thingshadow-2.png "Initial thing shadow state")
+    ![](thingshadow-2.png "Initial thing shadow state")
 
 You are now ready to perfom a cloud-triggered firmare over-the-air update. You can do so either [interactively](#interactive-firmare-over-the-air-update-using-the-aws-iot-console) through the AWS IoT Console or [programmatically](#programmatic-firmare-over-the-air-update-using-the-aws-cli) by using the AWS CLI.
 
@@ -165,37 +165,32 @@ You are now ready to perfom a cloud-triggered firmare over-the-air update. You c
 
 1. Go back to the [AWS IoT Console](https://console.aws.amazon.com/iot/home) and revisit the unnamed classic shadow of your AWS IoT thing (`Manage` > `Things` > `{{Your AWS IoT thing}}` > `Device Shadows` > `Classic Shadow` when using the *New console experience* which can be activated all down in the left side bar). Open the shadow state document for editing (`Device Shadow document` > `Edit`). Add a `desired` object with a `newVersion` attribute to indicate the new firmware version your device should be updated to and a `verificationData` attribute with the checksum or signature of the same (see `Products` > `{{Your FotaHub product}}` > `Details` > `{{New firmware version}}` at [Fotahub](https://fotahub.com)):
 
-```json
-{
-    "state": {
-        "reported": {
-            "currentVersion": "1.0",
-            "updateStatus": "none"
-        },
-        "desired": {
-            "newVersion": "1.1",
-            "verificationData": "<checksum or signature>"
+    ```json
+    {
+        "state": {
+            "reported": {
+                "currentVersion": "1.0",
+                "updateStatus": "none"
+            },
+            "desired": {
+                "newVersion": "1.1",
+                "verificationData": "<checksum or signature>"
+            }
         }
     }
-}
-```
+    ```
 
 2. Save the modified shadow state document (`Edit Device Shadow state` > `Update`). This will trigger the firmware over-the-air update procedure. Upon successful completion, the initial firmware program exits and the new firmware version downloaded from FotaHub is started automatically. The built-in self test is executed and, in case it succeeds, the new firmware version is confirmed and stays in place. You can see that
    * in the **terminal output** of the firmware program - it should show a banner with the product name and the new firmware version followed by some messages wrt the validation and confirmation of the same  
    * by inspecting the **shadow state document** in the AWS IoT Console - it should reflect the new firmware version as the currently running version and include an `updateStatus` attribute indicating the successful completion of the firmware over-the-air update:
    
-![](thingshadow-3.png "Thing shadow state after successful FOTA update")
+    ![](thingshadow-3.png "Thing shadow state after successful FOTA update")
 
-<p style="margin-left: 2em">In case the built-in self test fails, the new fimware version initiates the reversion of the firmware update and exits. The previous firmware version is resumed right after. You can see that
-<ul>
-    <ul>
-    <li>in the <strong>terminal output</strong> of the firmware program - it should show a banner with the product name and the new firmware version followed by some messages wrt the validation and the reversion of the same, and then another banner with the product name and the initial firmware version</li>
-    <li>by inspecting the <strong>shadow state document</strong> in the AWS IoT Console - it should reflect the initial firmware version as the currently running version and include an <code>updateStatus</code> attribute indicating the failure of the firmware over-the-air update:</li>
-    </ul>
-</ul>
-</p> 
+    In case the built-in self test fails, the new fimware version initiates the reversion of the firmware update and exits. The previous firmware version is resumed right after. You can see that
+    * in the **terminal output** of the firmware program - it should show a banner with the product name and the new firmware version followed by some messages wrt the validation and the reversion of the same, and then another banner with the product name and the initial firmware version
+    * by inspecting the **shadow state document** in the AWS IoT Console - it should reflect the initial firmware version as the currently running version and include an `updateStatus` attribute indicating the failure of the firmware over-the-air update:
 
-![](thingshadow-4.png "Thing shadow state after failed FOTA update")
+    ![](thingshadow-4.png "Thing shadow state after failed FOTA update")
 
 #### Programmatic firmare over-the-air update using the AWS CLI
 
@@ -203,43 +198,38 @@ You are now ready to perfom a cloud-triggered firmare over-the-air update. You c
 
 2. Open a terminal window (also on your host laptop or computer) and trigger a firmware over-the-air update for your device by entering an [aws iot-data publish](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iot-data/publish.html) command as shown below. Provide the name of your AWS IoT thing, the new firmware version your device should be updated to as well as the checksum or signature of the same (see `Products` > `{{Your FotaHub product}}` > `Details` > `{{New firmware version}}` at [Fotahub](https://fotahub.com)):
 
-**Windows:**   
-```bat
-aws iot-data publish --topic $aws/things/<Your AWS IoT thing>/shadow/update --cli-binary-format raw-in-base64-out --payload "{\"state\":{\"desired\":{\"newVersion\":\"1.1\",\"verificationData\":\"<checksum or signature>\"}}}"
-```
-**Linux/Mac OS X:**   
-```sh
-aws iot-data publish --topic \$aws/things/<Your AWS IoT thing>/shadow/update --cli-binary-format raw-in-base64-out --payload '{"state":{"desired":{"newVersion":"1.1","verificationData":"<checksum or signature>"}}}'
-```
+    **Windows:**   
+    ```bat
+    aws iot-data publish --topic $aws/things/<Your AWS IoT thing>/shadow/update --cli-binary-format raw-in-base64-out --payload "{\"state\":{\"desired\":{\"newVersion\":\"1.1\",\"verificationData\":\"<checksum or signature>\"}}}"
+    ```
+    **Linux/Mac OS X:**   
+    ```sh
+    aws iot-data publish --topic \$aws/things/<Your AWS IoT thing>/shadow/update --cli-binary-format raw-in-base64-out --payload '{"state":{"desired":{"newVersion":"1.1","verificationData":"<checksum or signature>"}}}'
+    ```
 
 3. Upon successful completion, the initial firmware program exits and the new firmware version downloaded from FotaHub is started automatically. The built-in self test is executed and, in case it succeeds, the new firmware version is confirmed and stays in place. You can see that
    * in the **terminal output** of the firmware program - it should show a banner with the product name and the new firmware version followed by some messages wrt the validation and confirmation of the same 
    * by retrieving the **shadow state document** using the [aws iot-data get-thing-shadow](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iot-data/get-thing-shadow.html) command as follows - it should reflect the new firmware version as the currently running version and include an `updateStatus` attribute indicating the successful completion of the firmware over-the-air update:
 
-**Windows:**   
-```bat
-aws iot-data get-thing-shadow --thing-name <Your AWS IoT thing> shadow-state.json && type shadow-state.json 
-```
-**Linux/Mac OS X:**   
-```sh
-aws iot-data get-thing-shadow --thing-name <Your AWS IoT thing> shadow-state.json && cat shadow-state.json
-```
+    **Windows:**   
+    ```bat
+    aws iot-data get-thing-shadow --thing-name <Your AWS IoT thing> shadow-state.json && type shadow-state.json 
+    ```
+    **Linux/Mac OS X:**   
+    ```sh
+    aws iot-data get-thing-shadow --thing-name <Your AWS IoT thing> shadow-state.json && cat shadow-state.json
+    ```
 
-**Resulting output:**
+    **Resulting output:**
 
-```sh
-{"state":{"reported":{"currentVersion":"1.1","updateStatus":"succeeded"}},"metadata":{...},"version":...,"timestamp":...}
-```
+    ```sh
+    {"state":{"reported":{"currentVersion":"1.1","updateStatus":"succeeded"}},"metadata":{...},"version":...,"timestamp":...}
+    ```
 
-<p style="margin-left: 2em">In case the built-in self test fails, the new fimware version initiates the reversion of the firmware update and exits. The previous firmware version is resumed right after. You can see that
-<ul>
-    <ul>
-    <li>in the <strong>terminal output</strong> of the firmware program - it should show a banner with the product name and the new firmware version followed by some messages wrt the validation and the reversion of the same, and then another banner with the product name and the initial firmware version</li>
-    <li>by inspecting the <strong>shadow state document</strong> retrieved as per above - it should reflect the initial firmware version as the currently running version and include an <code>updateStatus</code> attribute indicating the failure of the firmware over-the-air update:</li>
-    </ul>
-</ul>
-</p> 
+    In case the built-in self test fails, the new fimware version initiates the reversion of the firmware update and exits. The previous firmware version is resumed right after. You can see that
+    * in the **terminal output** of the firmware program - it should show a banner with the product name and the new firmware version followed by some messages wrt the validation and the reversion of the same, and then another banner with the product name and the initial firmware version
+    * by inspecting the **shadow state document** retrieved as per above - it should reflect the initial firmware version as the currently running version and include an `updateStatus` attribute indicating the failure of the firmware over-the-air update:
 
-```sh
-{"state":{"reported":{"currentVersion":"1.0","updateStatus":"failed"}},"metadata":{...},"version":...,"timestamp":...}
-```
+    ```sh
+    {"state":{"reported":{"currentVersion":"1.0","updateStatus":"failed"}},"metadata":{...},"version":...,"timestamp":...}
+    ```

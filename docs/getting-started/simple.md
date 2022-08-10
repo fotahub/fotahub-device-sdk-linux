@@ -44,25 +44,25 @@ If not yet done so, either clone or download and uncompress the [FotaHub Device 
 
 1. Start Visual Studio Code and open (`File` > `Folder...`) the `Simple` example included in the FotaHub Device SDK for Linux and Raspberry Pi (`<device-sdk-root>/examples/simple`).
 
-> &#x1F6C8; If you intend to run this example on your Raspberry Pi (or a similar single board computer) but don't want to undergo the hassle of connecting keyboard, mouse, monitor, etc. to it, you can perform  the steps described in the following remotely from your desktop computer using SSH. You can achieve that very conveniently by [enabling SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) on your Raspberry Pi and installing the [*Remote - SSH* extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) in Visual Studio Code. Find out more about how to set up and use this feature [here](https://code.visualstudio.com/docs/remote/ssh). 
+    > &#x1F6C8; If you intend to run this example on your Raspberry Pi (or a similar single board computer) but don't want to undergo the hassle of connecting keyboard, mouse, monitor, etc. to it, you can perform  the steps described in the following remotely from your desktop computer using SSH. You can achieve that very conveniently by [enabling SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) on your Raspberry Pi and installing the [*Remote - SSH* extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) in Visual Studio Code. Find out more about how to set up and use this feature [here](https://code.visualstudio.com/docs/remote/ssh). 
 
 2. Open the `DemoProductInfo.h` file, and initialize the `DEMO_PRODUCT_ID` and `DEMO_PRODUCT_NAME` constants with the id and the name of the previously created FotaHub product (see `Products` > `{{Your FotaHub product}}` > `Settings` > `General` at [Fotahub](https://fotahub.com)). Leave the `DEMO_PRODUCT_FIRMWARE_VERSION` as is for now. In case you have selected anything else than `SHA256` as the binary checksum algorithm for your FotaHub product or opted for using a signature instead, you also must adjust the `DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM` constant accordingly:
 
-```c
-#define DEMO_PRODUCT_ID "7c31c4b0-6864-4c5e-bf3b-b2e3696c8f89"
+    ```c
+    #define DEMO_PRODUCT_ID "7c31c4b0-6864-4c5e-bf3b-b2e3696c8f89"
 
-#define DEMO_PRODUCT_NAME "Demo Product"
+    #define DEMO_PRODUCT_NAME "Demo Product"
 
-#define DEMO_PRODUCT_FIRMWARE_VERSION "1.0"
+    #define DEMO_PRODUCT_FIRMWARE_VERSION "1.0"
 
-#define DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM FOTA_UPDATE_VERIFICATION_ALGORITHM_SHA256
-```
+    #define DEMO_PRODUCT_FIRMWARE_UPDATE_VERIFICATION_ALGORITHM FOTA_UPDATE_VERIFICATION_ALGORITHM_SHA256
+    ```
 
 3. Open the integrated terminal (`Terminal` > `New Terminal`) and build the example by typing the following command:
    
-```sh
-make
-```
+    ```sh
+    make
+    ```
 
 4. You can find the resulting firmware program in the `build/linux/debug/bin` or `build/raspios/debug/bin` folder (using the `Explorer` view). Its name equals the name of the FotaHub product configured in the `DemoProductInfo.h` file without spaces (e.g., `DemoProduct`).
 
@@ -70,19 +70,19 @@ make
 
 1. Go back to the `DemoProductInfo.h` file, and bump the `DEMO_PRODUCT_FIRMWARE_VERSION` constant:
 
-```c
-#define DEMO_PRODUCT_FIRMWARE_VERSION "1.1"
-```
+    ```c
+    #define DEMO_PRODUCT_FIRMWARE_VERSION "1.1"
+    ```
 
 2. Rebuild the example by typing the following command in the integrated terminal:
 
-```sh
-make UPDATE=y
-```
+    ```sh
+    make UPDATE=y
+    ```
 
 3. Locate the resulting new firmware program in the  `build/<os>/debug/bin` folder (using the `Explorer` view). Its name is the name of the FotaHub product configured in the `DemoProductInfo.h` file without spaces followed by an `Update` suffix (e.g., `DemoProductUpdate`).
    
-> &#x1F6C8; You can locate the new firmware program file also in your filesystem explorer or copy its path to the clipboard by using corresponding context menu actions in Visual Studio Code (`Reveal in File Explorer`/`Reveal in Finder` and `Copy Path`). When you are running this example on a Raspberry Pi (or a similar single board computer) and remotely accessing it from your desktop computer using the Visual Studio Code Remote SSH extension, you can also find a context menu action for downloading the new firmware program to your desktop computer (`Download...`). This can come quite handy in the subsequent steps.
+    > &#x1F6C8; You can locate the new firmware program file also in your filesystem explorer or copy its path to the clipboard by using corresponding context menu actions in Visual Studio Code (`Reveal in File Explorer`/`Reveal in Finder` and `Copy Path`). When you are running this example on a Raspberry Pi (or a similar single board computer) and remotely accessing it from your desktop computer using the Visual Studio Code Remote SSH extension, you can also find a context menu action for downloading the new firmware program to your desktop computer (`Download...`). This can come quite handy in the subsequent steps.
 
 4. Upload the new firmware program (e.g., `DemoProductUpdate`) as firmware version `1.1` to your FotaHub product as explained [here](../fotahub/upload-firmware.md).
 
@@ -90,21 +90,21 @@ make UPDATE=y
 
 1. Go back to Visual Studio Code and launch the initial firmware version by typing the following commands in the integrated terminal. Use `raspios` as OS when you are working on a Raspberry Pi or `linux` otherwise, and choose the firmware program name according to your FotaHub product name, e.g., `DemoProduct`:
 
-```sh
-chmod +x start.sh
-./start.sh build/<os>/debug/bin/<product-name>
-```
+    ```sh
+    chmod +x start.sh
+    ./start.sh build/<os>/debug/bin/<product-name>
+    ```
 
 2. The firmware program prints a banner including the product name and the initial firmware version into the terminal output. It also creates and opens the `DemoProductUpdate.info` file directly in Visual Studio Code (if the latter is not installed on your machine, you will need to open the `DemoProductUpdate.info` file manually in an editor of you choice):
    
-![](simple-1.png "Launch of initial firmware version") 
+    ![](simple-1.png "Launch of initial firmware version") 
 
 3. Enter the new firmware version followed by a ':' separator and the checksum or signature of the same (see `Products` > `{{Your FotaHub product}}` > `Details` > `{{New firmware version}}` at [Fotahub](https://fotahub.com)) in the `DemoProductUpdate.info` file and save it.
 
-![](simple-2.png "Trigger of FOTA update") 
+    ![](simple-2.png "Trigger of FOTA update") 
 
 4. This will trigger the firmware over-the-air update procedure. Upon successful completion, the initial firmware program exits and the new firmware version downloaded from FotaHub is started automatically. To verify that, check the firmware version in the banner being printed into the terminal output:
 
-![](simple-3.png "Execution of FOTA update")
+    ![](simple-3.png "Execution of FOTA update")
 
-> &#x26A0; Under certain conditions, it may happen that you encounter an `I/O error during handling of downloaded firmware chunk` right after the firmware over-the-air update procedure has been started. In this case,  check if there are any duplicate instances of the firmware program running on your machine (using `ps -a`). Kill all of them (using `sudo kill 9 <pid>`) and restart the firmware program.
+    > &#x26A0; Under certain conditions, it may happen that you encounter an `I/O error during handling of downloaded firmware chunk` right after the firmware over-the-air update procedure has been started. In this case,  check if there are any duplicate instances of the firmware program running on your machine (using `ps -a`). Kill all of them (using `sudo kill 9 <pid>`) and restart the firmware program.
